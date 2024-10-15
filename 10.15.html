@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>클릭해서 바뀌는 고양이 이미지</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f9f9f9;
+            text-align: center;
+            margin: 0;
+            padding: 20px;
+        }
+        h1 {
+            color: #333;
+        }
+        p {
+            font-size: 18px;
+            color: #666;
+        }
+        img {
+            width: 400px;
+            height: auto;
+            border-radius: 15px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+            cursor: pointer;
+        }
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>클릭하면 바뀌는 귀여운 고양이</h1>
+        <p>아래 이미지를 클릭하면 다른 고양이 사진으로 바뀝니다!</p>
+        <img id="catImage" src="https://d3fixtu11mscj5.cloudfront.net/channel/channel_list_KA6HRECDKP9OZ.jpg" alt="Cute Cat" onclick="changeImage()">
+    </div>
+
+    <script>
+        const images = [
+            "https://images.christiandaily.co.kr/data/images/full/77367/twitter.jpg",
+            "https://image-notepet.akamaized.net/resize/620x-/seimage/20180228/bc5a904732d80212c1ddd1f303fc9675.jpg",
+            "https://img1.daumcdn.net/thumb/R800x0/?scode=mtistory2&fname=https%3A%2F%2Ft1.daumcdn.net%2Fcfile%2Ftistory%2F27738433597DCB1312",
+            "https://blog.kakaocdn.net/dn/cbiho5/btrqLUBuZ8T/QweFCSHv78KjZEG7lpx0Nk/img.jpg",
+            "https://image-notepet.akamaized.net/seimage/20150909/%EC%9B%83%EA%B3%A01.jpg",
+            "https://img1.daumcdn.net/thumb/S1200x630/?fname=https://t1.daumcdn.net/news/202409/27/newsay/20240927090002118vdls.png"
+        ];
+
+        let currentIndex = 0;
+
+        function changeImage() {
+            currentIndex = (currentIndex + 1) % images.length;
+            document.getElementById("catImage").src = images[currentIndex];
+        }
+    </script>
+</body>
+</html>

@@ -1,60 +1,77 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>클릭해서 바뀌는 고양이 이미지</title>
+    <title>표정 변화 반응형 사이트</title>
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f9f9f9;
-            text-align: center;
+        /* 전체 화면을 설정 */
+        body, html {
             margin: 0;
-            padding: 20px;
+            padding: 0;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #f0f8ff;
+            overflow: hidden;
         }
-        h1 {
-            color: #333;
+        
+        /* 얼굴 스타일 */
+        .face {
+            position: absolute;
+            font-size: 2em;
+            animation: pop 0.3s ease;
+            transition: opacity 0.5s;
         }
-        p {
-            font-size: 18px;
-            color: #666;
-        }
-        img {
-            width: 400px;
-            height: auto;
-            border-radius: 15px;
-            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
-            cursor: pointer;
-        }
-        .container {
-            max-width: 600px;
-            margin: 0 auto;
+
+        /* 클릭할 때 나타나는 애니메이션 */
+        @keyframes pop {
+            0% { transform: scale(0.5); opacity: 0; }
+            100% { transform: scale(1); opacity: 1; }
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <h1>클릭하면 바뀌는 귀여운 고양이</h1>
-        <p>아래 이미지를 클릭하면 다른 고양이 사진으로 바뀝니다!</p>
-        <img id="catImage" src="https://d3fixtu11mscj5.cloudfront.net/channel/channel_list_KA6HRECDKP9OZ.jpg" alt="Cute Cat" onclick="changeImage()">
-    </div>
 
-    <script>
-        const images = [
-            "https://images.christiandaily.co.kr/data/images/full/77367/twitter.jpg",
-            "https://image-notepet.akamaized.net/resize/620x-/seimage/20180228/bc5a904732d80212c1ddd1f303fc9675.jpg",
-            "https://img1.daumcdn.net/thumb/R800x0/?scode=mtistory2&fname=https%3A%2F%2Ft1.daumcdn.net%2Fcfile%2Ftistory%2F27738433597DCB1312",
-            "https://blog.kakaocdn.net/dn/cbiho5/btrqLUBuZ8T/QweFCSHv78KjZEG7lpx0Nk/img.jpg",
-            "https://image-notepet.akamaized.net/seimage/20150909/%EC%9B%83%EA%B3%A01.jpg",
-            "https://img1.daumcdn.net/thumb/S1200x630/?fname=https://t1.daumcdn.net/news/202409/27/newsay/20240927090002118vdls.png"
-        ];
+<script>
+    // 클릭 횟수 추적
+    let clickCount = 0;
 
-        let currentIndex = 0;
+    // 클릭 이벤트 추가
+    document.addEventListener('click', function(event) {
+        // 클릭 횟수 증가
+        clickCount++;
 
-        function changeImage() {
-            currentIndex = (currentIndex + 1) % images.length;
-            document.getElementById("catImage").src = images[currentIndex];
+        // 표시할 표정을 선택
+        let faceEmoji;
+        if (clickCount % 3 === 1) {
+            faceEmoji = '😊'; // 첫 번째 클릭: 웃는 얼굴
+        } else if (clickCount % 3 === 2) {
+            faceEmoji = '😢'; // 두 번째 클릭: 우는 얼굴
+        } else {
+            faceEmoji = '😲'; // 세 번째 클릭: 황당한 얼굴
         }
-    </script>
+
+        // 얼굴 요소 생성
+        const face = document.createElement('div');
+        face.classList.add('face');
+        face.textContent = faceEmoji;
+        
+        // 클릭한 위치에 얼굴 배치
+        face.style.left = `${event.clientX}px`;
+        face.style.top = `${event.clientY}px`;
+
+        // body에 추가
+        document.body.appendChild(face);
+
+        // 1초 후 얼굴 삭제
+        setTimeout(() => {
+            face.style.opacity = '0';
+            face.addEventListener('transitionend', () => face.remove());
+        }, 1000);
+    });
+</script>
+
 </body>
 </html>

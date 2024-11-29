@@ -1,48 +1,39 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>~달걀 던져라~</title>
- <style>
-    body {
-  font-family: Arial, sans-serif;
-  text-align: center;
-  background-color: #00ffea;
-  margin: 0;
-  padding: 0;
-}
-
-#game-container {
-  position: relative;
-  margin: 20px auto;
-  max-width: 1920px;
-}
-
-canvas {
-  border: 2px solid #333;
-  display: block;
-  margin: 0 auto;
-}
-
-#nameInput, #startButton, #captureButton {
-  margin: 10px;
-  padding: 20px;
-  font-size: 16px;
-}
-
- </style>
-  <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Egg Throwing Game</title>
+    <style>
+        body {
+            margin: 0;
+            overflow: hidden;
+            font-family: Arial, sans-serif;
+        }
+        #controls {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            z-index: 10;
+        }
+        #targetName {
+            font-size: 16px;
+            padding: 5px;
+            margin-right: 5px;
+        }
+        #captureButton {
+            display: none;
+            margin-top: 10px;
+        }
+    </style>
 </head>
 <body>
-  <div id="game-container">
+    <div id="controls">
+        <input type="text" id="targetName" placeholder="Enter target name">
+        <button id="updateName">Set Name</button>
+        <button id="captureButton">Capture Screen</button>
+    </div>
     <canvas id="gameCanvas"></canvas>
-    <input type="text" id="nameInput" placeholder="Write a name..." />
-    <button id="startButton">Start Throwing</button>
-    <button id="captureButton">Capture Screen</button>
-  </div>
-  
-
-  <script src="script.js"></script>
+    <script src="game.js"></script>
 </body>
 </html>
